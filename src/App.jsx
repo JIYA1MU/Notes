@@ -24,7 +24,7 @@ function App() {
   }
 
     return (
-    <>
+    <div className='parent'>
     <Header />
     <CreateArea onAdd = {addNote}/>
     {
@@ -38,7 +38,7 @@ function App() {
       })
     }
     <Footer />
-    </>
+    </div>
   )
 }
 
