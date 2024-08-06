@@ -34,7 +34,7 @@ function App() {
   }
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`https://notes-react-demo-backend.vercel.app/notes${id}`);
+      await axios.delete(`https://notes-react-demo-backend.vercel.app/notes/${id}`);
       setNotes(prevNotes => prevNotes.filter(note => note._id !== id));
     } catch (error) {
       console.error("There was an error deleting the note!", error);
