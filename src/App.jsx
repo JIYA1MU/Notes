@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     const fetchNotes = async () => {
       try{
-        const response = await axios.get(`https://notes-react-demo-backend.vercel.app/`);
+        const response = await axios.get(`https://notes-react-demo-backend.vercel.app/notes`);
         setNotes(response.data)
       }
       catch(error){
@@ -25,7 +25,7 @@ function App() {
 
   const addNote = async(newNote) => {
     try {
-      const response = await axios.post('https://notes-react-demo-backend.vercel.app/', newNote);
+      const response = await axios.post('https://notes-react-demo-backend.vercel.app/notes', newNote);
       setNotes(prevNotes => [...prevNotes, response.data]);
     }
     catch(error){
@@ -34,7 +34,7 @@ function App() {
   }
   const deleteNote = async (id) => {
     try {
-      await axios.delete(`https://notes-react-demo-backend.vercel.app/${id}`);
+      await axios.delete(`https://notes-react-demo-backend.vercel.app/notes${id}`);
       setNotes(prevNotes => prevNotes.filter(note => note._id !== id));
     } catch (error) {
       console.error("There was an error deleting the note!", error);
