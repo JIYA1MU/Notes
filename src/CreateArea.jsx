@@ -1,18 +1,18 @@
-import React , {useState} from "react"
-import AddIcon from '@mui/icons-material/Add';
-import Fab from '@mui/material/Fab';
-import Zoom from '@mui/material/Zoom';
+import React , {useState , useEffect } from "react"
+import AddIcon from '@mui/icons-material/Add'
+import Fab from '@mui/material/Fab'
+import Zoom from '@mui/material/Zoom'
+import axios from 'axios'
 
 function CreateArea(props){
 
     const [isExpanded , setExpanded] = useState(false);
-
     const [note , setNote] = useState({
         title : "",
         content : ""
-    });
+    }); 
 
-    function handleChnage(event){
+    function handleChange(event){
         const {name , value} = event.target;
         setNote(prevNote => {
             return{
@@ -22,13 +22,19 @@ function CreateArea(props){
         });
     }
 
-    function submitNote(event){
-        props.onAdd(note);
-        setNote({
-            title : "",
-            content : ""
-        })
+    async function submitNote(event){
         event.preventDefault();
+        try{
+            props.onAdd(note);
+            setNote({
+                title : "",
+                content : ""
+            })
+        }
+        catch(error){
+            console.error("Error Occured!!" , error)
+        }
+        console.log(note.title , note.content)
     }
 
     function expand(){
@@ -39,7 +45,7 @@ function CreateArea(props){
         <div>
           <form className="create-note">
             {isExpanded && <input 
-            onChange={handleChnage}
+            onChange={handleChange}
             name="title" 
             value={note.title} 
             placeholder="Title" 
@@ -48,7 +54,7 @@ function CreateArea(props){
 
             <textarea 
             onClick={expand}
-            onChange={handleChnage}
+            onChange={handleChange}
             name="content"
             value = {note.content} 
             placeholder="Take a note..." 
